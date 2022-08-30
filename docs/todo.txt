@@ -2,3 +2,4 @@ Text for window
 Materials on watering can
 Seed Packet Textures
 Hosting Website
+Add Favicon

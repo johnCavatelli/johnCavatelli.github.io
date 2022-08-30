@@ -5,6 +5,8 @@ import {GLTFLoader} from 'https://unpkg.com/three@0.126.0/examples/jsm/loaders/G
 // import gsap from 'htpps://unpkg.com/gsap@3.10.4'
 import gsap from 'https://unpkg.com/gsap@3.10.4/gsap.min.js'
 
+
+
 //Variables
 const states = { 
 intro: "intro",

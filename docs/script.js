@@ -1,10 +1,9 @@
 import './style.css'
-import * as THREE from 'three'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader'
-// import * as dat from 'dat.gui'
-import gsap from 'gsap'
-// import { StencilOp, Vector3 } from 'three'
+import * as THREE from 'https://unpkg.com/three@0.126.0/build/three.module.js';
+// import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+import {GLTFLoader} from 'https://unpkg.com/three@0.126.0/examples/jsm/loaders/GLTFLoader'
+// import gsap from 'htpps://unpkg.com/gsap@3.10.4'
+import gsap from 'htpps://unpkg.com/gsap@3.10.4/gsap.min.js'
 
 //Variables
 const states = { 
@@ -343,9 +342,9 @@ window.addEventListener( 'pointermove', onMouseMove );
 window.addEventListener( 'click', onClick);
 
 // Controls
-const controls = new OrbitControls(camera, renderer.domElement)
-controls.panSpeed = 2
-controls.enableDamping = true
+// const controls = new OrbitControls(camera, renderer.domElement)
+// controls.panSpeed = 2
+// controls.enableDamping = true
 
 //HTML articles in dictionary so that when the plant is clicked on it's brought up
 plantHitboxToArticle[plant1_hitbox.id] = '<a herf="https://github.com/johnCavatelli">Link to Github</a>'

@@ -3,7 +3,7 @@ import * as THREE from 'https://unpkg.com/three@0.126.0/build/three.module.js';
 // import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import {GLTFLoader} from 'https://unpkg.com/three@0.126.0/examples/jsm/loaders/GLTFLoader'
 // import gsap from 'htpps://unpkg.com/gsap@3.10.4'
-import gsap from 'htpps://unpkg.com/gsap@3.10.4/gsap.min.js'
+import gsap from 'https://unpkg.com/gsap@3.10.4/gsap.min.js'
 
 //Variables
 const states = { 

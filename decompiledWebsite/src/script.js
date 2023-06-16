@@ -601,7 +601,7 @@ function ChangeState(newState){
         case states["lookSeeds"]:
             currentState = states["lookSeeds"];
             ChangeCameraValues(4.3,2,0,-1.5,0,0,2);
-            instructions_text.innerHTML = "<h2>Choose some seeds to plant</h2>"
+            instructions_text.innerHTML = "<h2>Click some seeds to plant</h2>"
             ChangeHTMLStates({text_welcome: "none",button_start: "none",text_loading:"none", button_back:"none", button_garden: "", button_seeds: "none", text_instructions:""});
           break;
         case states["lookGarden"]:
@@ -641,7 +641,7 @@ function ChangeState(newState){
                 ease: "power3.out"         
             })            
             ChangeCameraValues(2,2.3,1.6,-0.8,0,0,2);
-            instructions_text.innerHTML = "<h2>Dig a hole</h2>"
+            instructions_text.innerHTML = "<h2>Click the dirt to dig a hole</h2>"
             ChangeHTMLStates({button_back: "none", button_garden:"none", button_seeds:"none", text_instructions:""});
           break;
         case states["plantingSeed"]:

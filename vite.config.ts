@@ -1,7 +1,17 @@
 import { defineConfig, loadEnv } from 'vite'
+import { resolve } from 'path'
 
 export default defineConfig({  
   build: {
-    target: 'esnext'
+    target: 'esnext',
+    rollupOptions: {
+      input: {
+        main: resolve(__dirname, 'index.html'),
+        garden: resolve(__dirname, 'garden/index.html'),
+        about: resolve(__dirname, 'about/index.html'),
+        blog: resolve(__dirname, 'blog/index.html'),
+      },
+    },
   },
+  
 })

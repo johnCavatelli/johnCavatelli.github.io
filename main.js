@@ -5,13 +5,17 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { TextGeometry } from 'three/addons/geometries/TextGeometry.js';
 import { FontLoader } from 'three/addons/loaders/FontLoader.js';
 
+//Set Canvas Width and Height so it renders correctly
 const bg = document.getElementsByClassName('glslCanvas')[0];
 bg.width = window.innerWidth;
 bg.height = window.innerHeight;
+//Start Load ing Assets
 const loadingManager = new THREE.LoadingManager();//loading screen manager
-loadingManager.onStart = function (url, item, total) { console.log("Starting Loading"); }
+loadingManager.onStart = function (url, item, total) { }
 loadingManager.onLoad = function () { }
 
+//Scene Setup
+var mouse, currentHover, raycaster;
 const camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 500);
 camera.position.set(20, 7, 0);
 camera.lookAt(0, 0, 0)
@@ -20,16 +24,18 @@ const gltfLoader = new GLTFLoader(loadingManager);
 
 //Geometry
 var models = {};
+var textHitboxes = {};
+const linkTitles = ['about', 'garden', 'blog'];
+const links = ["aj is really stupid for indexing at 1", "/about/index.html", "/garden/index.html", "/blog/index.html"]
 const centerBox = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshNormalMaterial());
 centerBox.position.set(0, 0, 0);
 scene.add(centerBox);
 const eyeMat = new THREE.MeshStandardMaterial({ map: new THREE.Texture() });
 const eyeMeshes = [1, 2, 3];//the incidies of all the eyeballs in the model array
 const eyeURL = new URL('/models/ball.glb', import.meta.url);
-const fontURL = new URL('/resource/orbit_regular.json', import.meta.url);
-const skeletonMat = new THREE.MeshStandardMaterial({wireframe:true,wireframeLinewidth:100,color:new THREE.Color(0x00ff00)});
-const skeletonURL = new URL('/models/aaa.glb',import.meta.url);
-await CreateMesh(skeletonURL, [skeletonMat], [0,0,0], [0,0,0],2,69,true);
+const skeletonMat = new THREE.MeshStandardMaterial({ wireframe: true, wireframeLinewidth: 100, color: new THREE.Color(0x00ff00) });
+const skeletonURL = new URL('/models/aaa.glb', import.meta.url);
+await CreateMesh(skeletonURL, [skeletonMat], [0, 0, 0], [0, 0, 0], 2, 69, true);
 await CreateMesh(eyeURL, [eyeMat], [8, 15, -4], [0, -1.1, 0], 0.5, 1, true);
 await CreateMesh(eyeURL, [eyeMat], [10, 0, 7], [0, -1.1, 0], 0.5, 2, true);
 await CreateMesh(eyeURL, [eyeMat], [12, -15, 0], [0, -1.1, 0], 0.5, 3, true);
@@ -57,22 +63,28 @@ hemiLight.position.set(0, 20, 0);
 scene.add(hemiLight);
 
 
-//Rendering
+//Rendering Setup
 const canvas = document.querySelector('.webgl');
 const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, canvas });
-renderer.setClearColor(0x000000, 0); // the default
+//renderer.setClearColor(0x000000, 0); // the default
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setAnimationLoop(animation);
 
-// Instantiate the class with a seed
+// Instantiate new classes
 const perlin = new Perlin(Math.random());
 const clock = new THREE.Clock();
-const controls = new OrbitControls(camera, renderer.domElement);
+raycaster = new THREE.Raycaster();
+mouse = new THREE.Vector2;
+window.addEventListener('pointermove', onMouseMove);
+window.addEventListener('click', onClick);
+const controls = new OrbitControls(camera, renderer.domElement);//Orbit controls
 controls.update();
 
 let lateLoadComplete = false;//Flag to load things after models have been loaded
 function animation(time) {
     //console.log(models);
+
+    //MODELS ANIMATION
     const elapsedTime = clock.getElapsedTime();
     if (typeof models[1] !== "undefined") {
         if (!lateLoadComplete) {
@@ -88,8 +100,8 @@ function animation(time) {
         eyeMeshes.forEach((item) => {
             if (models[item] != null) {
                 //update positions
-                models[item].rotation.y = 5.2 * perlin.get3(new THREE.Vector3(elapsedTime + item, 0, 0));
-                models[item].position.y = 5.2 * perlin.get3(new THREE.Vector3(elapsedTime + item, 0, 0));
+                models[item].rotation.y = 0.2 * perlin.get3(new THREE.Vector3(elapsedTime + item, 0, 0));
+                models[item].position.y = 0.2 * perlin.get3(new THREE.Vector3(elapsedTime + item, 0, 0));
                 //models[item].position.x = 9.2 * perlin.get3(new THREE.Vector3(elapsedTime + item, 0, 0));
 
                 //update Curves
@@ -101,10 +113,45 @@ function animation(time) {
             }
         });
     }
-    if(models[69] != null){models[69].children[0].rotation.y = .5 * elapsedTime;}
+    if (models[69] != null) { models[69].children[0].rotation.y = .5 * elapsedTime; }//rotate center skeleton
 
-    //controls.update();
+
+    //RAYCAST/MOUSE HANDLING
+    raycaster.setFromCamera(mouse, camera);
+    const intersects = raycaster.intersectObjects( scene.children );// calculate objects intersecting the picking ray
+    var newHover;
+    for ( let i = 0; i < intersects.length; i ++ ) {
+        //console.log(intersects[i].object.name?.includes("Text"));
+        if(intersects[i].object.name?.includes("Text")){
+            // console.log(models)
+            //console.log(intersects[i].object.id);
+            newHover = intersects[i].object.id;
+            console.log(textHitboxes[newHover]);
+        }                
+    }
+    if(newHover != currentHover){
+        currentHover = newHover;
+    }
+
+    //RENDER
     renderer.render(scene, camera);
+}
+
+
+
+
+//Functions
+function onMouseMove(event) {
+    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+    mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
+}
+
+function onClick(event) {
+    if (currentHover != null) {
+        console.log("Clicked on: " + currentHover);
+        window.open( 
+            links[textHitboxes[currentHover]], "_self");
+    }
 }
 
 const sizes = {
@@ -128,11 +175,6 @@ function resize() {
     // Update renderer
     renderer.setSize(sizes.width, sizes.height)
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-    // if (uniforms.u_resolution !== undefined){
-    //     uniforms.u_resolution.value.x = window.innerWidth;
-    //     uniforms.u_resolution.value.y = window.innerHeight;
-    // }
-
 }
 
 function setEyeSizes() {
@@ -205,16 +247,18 @@ async function LoadText() {
             curveSegments: 6,
             bevelEnabled: false,
         }
-        const linkTitles = ['about','garden','blog'];
+        // const linkTitles = ['about', 'garden', 'blog'];
         for (let i = 0; i < linkTitles.length; i++) {
             console.log(i);
             let textGeometry = new TextGeometry(linkTitles[i], fontProps);
             let textMesh = new THREE.Mesh(textGeometry, new THREE.MeshNormalMaterial());
             textMesh.position.set(2, 0, 2);
             textMesh.rotation.set(0, 90, 0);
+            textMesh.name = "Text" + (i+1);
             scene.add(textMesh);
+            textHitboxes[textMesh.id] = i + 1;
             SetModel(textMesh, 201 + i);
-            models[i+1].add(textMesh);
+            models[i + 1].add(textMesh);
         }
     });
 }

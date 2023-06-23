@@ -1,34 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="flower32.png" sizes="32x32">
     <title>AJ Serck</title>
-    <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAACx0lEQVQ4jY2SXUhTYRjH/+85Z25nm9txWzrn1/qw0TRDpBCNsG4koy6C7oygLIugG6mgq91EVDdRhDdighcS0U1diEjURVpEOUzEkM35UfNrZ7rj2XaO2zlvF7JK/KDn6uF5f8+f53mfP7BLtPVMdLT1THTsxuwYV7rHn/UGk0rvSFK52j3+ZCeO2a54sXP0VN3B4lZnPm902nhjbWXxpdbOYNN/C7gE83WvWxAEE2A3At5iQXDZrTe2Y7lccoFS9tCbmRPZLKAT6gQAv4uAUuDTLwrexDqbHwwfYFhK+283TIEQCgAk8DbqSitKj83KH3fZeTshgCgpo/W+wiNNFQQA0DeyhtFIbHmvp8ACSvV5UZ5eEOV30ZnUPS6tql2Nh8vPcNzGNkYW8HlsReOzYrSpwuWZjqUxG0tqLUe9e3QKpLNAeZFQndH06n4mBA4MGYzG5XPlhTbicxLsEwAAbp/DIU0uqepQKGG42eRmrXkbq0ZWgR8ixdyyJK6o6wPMw/Pe55FofDCRUhFeoViQN0AHz9g+hxOaqmhKLKEgq1MspYDQCsWqrK5/Dy32vbxW009yn3j3deRFvjnvLEfYAsJQ3cKB1Ffa6WI8jcICHoPj8ay4pmYNLBOOJdKvui7772+6wtRYqr3Cr1efrPU6a90MU2wFJJVi4qeElhoHSh0l3Ld5HR+CkUxilj7e4gOLR2+vryqtM7AEbitAAUyKFPL6xpBuC2DiCOr9ZXW8h7Zt8YGZN1SZjQZiYIH5NWBWohibk1U5A3ydp8aSfAIDA5hNBmLluZotAllNZwEgnQFGlygymo6xyMJ7UEKiZc7m5dRf0+bYTQIa1YOR6Mrauq6pCUmNLSaSH2PL8VuKlEcGtNDTQsHSaLcZXXkMa9SoHsz1/bkCAJx+NLSfMMgekxvmAgGi//sWCFDmi3W4jOrg+u80hnP13zpeLdS4vSSEAAAAAElFTkSuQmCC" sizes="16x16">
-    <link rel="icon" type="image/png" href="data:image/png;base64,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" sizes="32x32">
-    <link rel="icon" type="image/png" href="/assets/flower96.d2917c37.png" sizes="96x96">
-    
-  <script type="module" crossorigin src="/assets/index.f0d66e6d.js"></script>
-  <link rel="stylesheet" href="/assets/index.ea12fd5e.css">
-</head>
-<body>
-    <p id="mobile-blocker"><br><br>Sorry! But my page isn't able to handle the prowess of this device! <br> ( ˘︹˘ )</p>
-    <div id="start-container">
-        <button id="start">Hop In</button>        
+  </head>
+  <body>
+
+    <!-- <iframe frameborder="0" src="https://www.shadertoy.com/embed/DsfyWB?gui=false&t=10&paused=false&muted=true"></iframe> -->
+    <script type="text/javascript" src="https://rawgit.com/patriciogonzalezvivo/glslCanvas/master/dist/GlslCanvas.js"></script>
+    <canvas class="glslCanvas" data-fragment-url="shader.frag"></canvas>
+    <div class=" imgdiv">
+        <!-- <div class="facediv"><img src="cutout.png" class="cutout"></div> -->
     </div>
-    <button id="garden">To Garden<br>←</button>
-    <button id="seeds">To Seeds<br>→</button>
-    <button id="back">Back</button>   
-    <div class="container">
-        <!-- <div class="content"> -->
-            <div id="link-container"><a id="link" target="_blank" href="www.google.com"></a></div>
-            <div id="loading"><h1>>loooooading</h1></div>
-            <div id="welcome"><h1>Welcome To My Garden</h1></div>
-            <div id="instructions"><h1>Instructions</h1></div>
-            <div id="article"></div>
-        <!-- </div> -->
-    </div>
+    <h1 style="color:whitesmoke">WELCOME TO MY WEBSITE</h1>
+    <!-- <img src="http://i.stack.imgur.com/SBv4T.gif" alt="this slowpoke moves"  width="250" /> -->
     <canvas class="webgl"></canvas>
-    
-</body>
+    <script type="module" src="main.js"></script>
+  </body>
 </html>

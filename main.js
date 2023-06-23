@@ -197,7 +197,7 @@ async function CreateTubeMeshes() {
 
 async function LoadText() {
     const loader = new FontLoader();
-    loader.load('/resource/orbit_regular.json', function (font) {
+    loader.load('/orbit_regular.json', function (font) {
         let fontProps = {
             font: font,
             size: 1,

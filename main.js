@@ -214,24 +214,5 @@ async function LoadText() {
             SetModel(textMesh, 201 + i);
             models[i+1].add(textMesh);
         }
-/*
-        const textGeometry_1 = new TextGeometry('about', fontProps);
-        let text_1 = new THREE.Mesh(textGeometry_1, new THREE.MeshNormalMaterial());
-        text_1.position.set(2, 0, 2);
-        text_1.rotation.set(0, 90, 0);
-        scene.add(text_1);
-        SetModel(text_1, 201);
-        models[1].add(text_1);
-
-
-        const textGeometry_2 = new TextGeometry('garden', fontProps);
-        let text_2 = new THREE.Mesh(textGeometry_2, new THREE.MeshNormalMaterial());
-        scene.add(text_2);
-        SetModel(text_2, 202);
-        const textGeometry_3 = new TextGeometry('blog', fontProps);
-        let text_3 = new THREE.Mesh(textGeometry_3, new THREE.MeshNormalMaterial());
-        scene.add(text_3);
-        SetModel(text_3, 203);
-        */
     });
 }

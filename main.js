@@ -26,6 +26,7 @@ scene.add(centerBox);
 const eyeMat = new THREE.MeshStandardMaterial({ map: new THREE.Texture() });
 const eyeMeshes = [1, 2, 3];//the incidies of all the eyeballs in the model array
 const eyeURL = new URL('/models/ball.glb', import.meta.url);
+const fontURL = new URL('/resource/orbit_regular.json', import.meta.url);
 const skeletonMat = new THREE.MeshStandardMaterial({wireframe:true,wireframeLinewidth:100,color:new THREE.Color(0x00ff00)});
 const skeletonURL = new URL('/models/aaa.glb',import.meta.url);
 await CreateMesh(skeletonURL, [skeletonMat], [0,0,0], [0,0,0],2,69,true);
@@ -76,7 +77,8 @@ function animation(time) {
     if (typeof models[1] !== "undefined") {
         if (!lateLoadComplete) {
             lateLoadComplete = true;
-            LoadText()
+            LoadText();
+            resize();
         }
         //models[2].children[0].rotation.y = 5.2 * perlin.get3(new THREE.Vector3(elapsedTime,0,0));
         let tubularSegments = 20,
@@ -195,7 +197,7 @@ async function CreateTubeMeshes() {
 
 async function LoadText() {
     const loader = new FontLoader();
-    loader.load('orbit_regular.json', function (font) {
+    loader.load('/resource/orbit_regular.json', function (font) {
         let fontProps = {
             font: font,
             size: 1,

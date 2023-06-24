@@ -77,6 +77,16 @@ raycaster = new THREE.Raycaster();
 mouse = new THREE.Vector2;
 window.addEventListener('pointermove', onMouseMove);
 window.addEventListener('click', onClick);
+window.addEventListener("touchend", (ev)=>{
+    //console.log((ev.changedTouches[0].clientX * (2/window.innerWidth) - 1) );
+    // mouse.x = (ev.changedTouches[0].clientX * (2/window.innerWidth) - 1);
+    // mouse.y = (ev.changedTouches[0].clientY * (2/window.innerHeight) - 1); 
+    mouse.x = (ev.changedTouches[0].clientX / window.innerWidth) * 2 - 1;
+    mouse.y = - (ev.changedTouches[0].clientY / window.innerHeight) * 2 + 1;
+    console.log(mouse);
+    handleRaycast();
+    onClick();
+});
 const controls = new OrbitControls(camera, renderer.domElement);//Orbit controls
 controls.update();
 
@@ -117,6 +127,17 @@ function animation(time) {
 
 
     //RAYCAST/MOUSE HANDLING
+    handleRaycast();
+
+    //RENDER
+    renderer.render(scene, camera);
+}
+
+
+
+
+//Functions
+function handleRaycast(){
     raycaster.setFromCamera(mouse, camera);
     const intersects = raycaster.intersectObjects( scene.children );// calculate objects intersecting the picking ray
     var newHover;
@@ -131,16 +152,9 @@ function animation(time) {
     }
     if(newHover != currentHover){
         currentHover = newHover;
-    }
-
-    //RENDER
-    renderer.render(scene, camera);
+    }    
 }
 
-
-
-
-//Functions
 function onMouseMove(event) {
     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
@@ -249,7 +263,7 @@ async function LoadText() {
         }
         // const linkTitles = ['about', 'garden', 'blog'];
         for (let i = 0; i < linkTitles.length; i++) {
-            console.log(i);
+            //console.log(i);
             let textGeometry = new TextGeometry(linkTitles[i], fontProps);
             let textMesh = new THREE.Mesh(textGeometry, new THREE.MeshNormalMaterial());
             textMesh.position.set(2, 0, 2);

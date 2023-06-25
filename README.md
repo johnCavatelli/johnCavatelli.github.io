@@ -4,6 +4,20 @@ Most websites are pretty boring... spending 3 hours centering a div so that "The
 
 ## Built using Three.js and shaders written in GLSL
 
+-Math for equally distributing eyes around the head
+-arrow key compatibility()
+-Scaling Of the eyes
+TODO:
+-Hover Effects
+-Zoom in at start
+-Add Tutorial Texture About Click and drag that disappears after rotate
+-About Page Background Shader
+-About Page Body
+-Blog Background Shader
+-Blog Page
+
+-Touch support for Garden
+
 To Run Locally:
 Clone Repo > open folder > npm i > npm run dev <3
 Utilizes Vite for runs/builds. See deployment action .github/workflows/action.yml

@@ -9,6 +9,22 @@ html{
   overflow-x: hidden;
 }
 
+a{
+  text-decoration: none;
+  z-index: 5;
+}
+
+#githubCode{
+  width: 7vh;
+  height: 7vh;
+  font-size: 1.8em;
+  z-index: 2;
+  position: fixed;
+  top: 89vh;
+  left: 2vw;
+  color: rgb(117, 0, 212);
+}
+
 .glslCanvas {
   position: fixed;
   width: 100%;
@@ -49,4 +65,47 @@ html{
   top: 0;
   left: 0;
   outline: none;
+}
+
+button {
+  border-radius: 2%;
+  -webkit-box-shadow: 0px 8px 23px 1px rgba(0,0,0,0.37); 
+  box-shadow: 0px 8px 23px 1px rgba(0,0,0,0.37);
+  border: 2px solid currentColor;
+  color: rgb(56, 55, 58);
+  background-color: rgba(255,255,255,0.1);
+  overflow: hidden;
+  font-weight: bolder;
+  padding: 0rem;
+  position: relative;
+  text-decoration: none;
+  transition: 0.2s transform ease-in-out;
+  will-change: transform;
+  z-index: 2;
+}
+button::after {
+  background-color: rgba(77, 77, 77, 0.71);
+  border-radius: 0px;
+  content: '';
+  display: block;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 2;
+  transform: translate(-100%, 0) rotate(10deg);
+  transform-origin: top left;
+  transition: 0.2s transform ease-out;
+  will-change: transform;
+  z-index: -1;
+}
+button:hover::after {
+  transform: translate(0, 0);
+}
+button:hover {
+  border: 2px solid transparent;
+  color: #ffffff;
+  transform: scale(1.05);
+  will-change: transform;
 }

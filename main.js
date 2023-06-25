@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import gsap from 'gsap'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { Perlin } from "three-noise";
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
@@ -15,30 +16,33 @@ loadingManager.onStart = function (url, item, total) { }
 loadingManager.onLoad = function () { }
 
 //Scene Setup
-var mouse, currentHover, raycaster;
+var mouse, currentHover, raycaster, mouseDownElement;
+var skelHover = false;
 const camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 500);
-camera.position.set(20, 7, 0);
-camera.lookAt(0, 0, 0)
+camera.position.set(90, 200, 5);
+camera.lookAt(0, 0, 0);
 const scene = new THREE.Scene();
 const gltfLoader = new GLTFLoader(loadingManager);
 
 //Geometry
 var models = {};
 var textHitboxes = {};
-const linkTitles = ['about', 'garden', 'blog'];
+const linkTitles = ['about', 'garden', 'blog'];//art games contact
 const links = ["aj is really stupid for indexing at 1", "/about/index.html", "/garden/index.html", "/blog/index.html"]
-const centerBox = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshNormalMaterial());
+const meshNormalMat = new THREE.MeshNormalMaterial();
+const centerBox = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), meshNormalMat);
 centerBox.position.set(0, 0, 0);
 scene.add(centerBox);
 const eyeMat = new THREE.MeshStandardMaterial({ map: new THREE.Texture() });
 const eyeMeshes = [1, 2, 3];//the incidies of all the eyeballs in the model array
 const eyeURL = new URL('/models/ball.glb', import.meta.url);
-const skeletonMat = new THREE.MeshStandardMaterial({ wireframe: true, wireframeLinewidth: 100, color: new THREE.Color(0x00ff00) });
+const skeletonMat = new THREE.MeshStandardMaterial({ wireframe: true, wireframeLinewidth: 3, color: new THREE.Color(`hsl(${Math.random() * 100},100%,50%)`) });
+const skeletonHighlightMat = new THREE.MeshStandardMaterial({ wireframe: true, wireframeLinewidth: 5, color: new THREE.Color(0x0000ff) });
 const skeletonURL = new URL('/models/aaa.glb', import.meta.url);
 await CreateMesh(skeletonURL, [skeletonMat], [0, 0, 0], [0, 0, 0], 2, 69, true);
-await CreateMesh(eyeURL, [eyeMat], [8, 15, -4], [0, -1.1, 0], 0.5, 1, true);
-await CreateMesh(eyeURL, [eyeMat], [10, 0, 7], [0, -1.1, 0], 0.5, 2, true);
-await CreateMesh(eyeURL, [eyeMat], [12, -15, 0], [0, -1.1, 0], 0.5, 3, true);
+await CreateMesh(eyeURL, [eyeMat], [8, 15, -4], [0, 0, 0], 0.5, 1, true);
+await CreateMesh(eyeURL, [eyeMat], [10, 0, 7], [0, 0, 0], 0.5, 2, true);
+await CreateMesh(eyeURL, [eyeMat], [12, -15, 0], [0, 0, 0], 0.5, 3, true);
 const tubeMeshes = [101, 102, 103];//indicies of all the tubes
 await CreateTubeMeshes();
 
@@ -76,18 +80,22 @@ const clock = new THREE.Clock();
 raycaster = new THREE.Raycaster();
 mouse = new THREE.Vector2;
 window.addEventListener('pointermove', onMouseMove);
-window.addEventListener('click', onClick);
-window.addEventListener("touchend", (ev)=>{
+window.addEventListener('mouseup', mouseUp);
+window.addEventListener('mousedown', mouseDown);
+window.addEventListener("touchend", (ev) => {
     //console.log((ev.changedTouches[0].clientX * (2/window.innerWidth) - 1) );
     // mouse.x = (ev.changedTouches[0].clientX * (2/window.innerWidth) - 1);
     // mouse.y = (ev.changedTouches[0].clientY * (2/window.innerHeight) - 1); 
     mouse.x = (ev.changedTouches[0].clientX / window.innerWidth) * 2 - 1;
     mouse.y = - (ev.changedTouches[0].clientY / window.innerHeight) * 2 + 1;
-    console.log(mouse);
+    //console.log(mouse);
     handleRaycast();
-    onClick();
+    mouseDown();
+    mouseUp();
 });
 const controls = new OrbitControls(camera, renderer.domElement);//Orbit controls
+controls.enableDamping = false; controls.dampingFactor = 0.05; controls.enablePan = false; controls.enableZoom = false; controls.minPolarAngle = 0; controls.maxPolarAngle = Math.PI * 0.5; controls.rotateSpeed = 0.8;
+//controls.enabled = false;
 controls.update();
 
 let lateLoadComplete = false;//Flag to load things after models have been loaded
@@ -96,11 +104,12 @@ function animation(time) {
 
     //MODELS ANIMATION
     const elapsedTime = clock.getElapsedTime();
-    if (typeof models[1] !== "undefined") {
+    if (typeof models[3] !== "undefined") {
         if (!lateLoadComplete) {
             lateLoadComplete = true;
             LoadText();
             resize();
+            LoadCamera();
         }
         //models[2].children[0].rotation.y = 5.2 * perlin.get3(new THREE.Vector3(elapsedTime,0,0));
         let tubularSegments = 20,
@@ -110,12 +119,12 @@ function animation(time) {
         eyeMeshes.forEach((item) => {
             if (models[item] != null) {
                 //update positions
-                models[item].rotation.y = 0.2 * perlin.get3(new THREE.Vector3(elapsedTime + item, 0, 0));
-                models[item].position.y = 0.2 * perlin.get3(new THREE.Vector3(elapsedTime + item, 0, 0));
+                //models[item].rotation.y = 0.2 * perlin.get3(new THREE.Vector3(elapsedTime + item, 0, 0));
+                models[item].position.y = 0.8 * perlin.get3(new THREE.Vector3(elapsedTime + item, 0, 0));
                 //models[item].position.x = 9.2 * perlin.get3(new THREE.Vector3(elapsedTime + item, 0, 0));
 
                 //update Curves
-                pa[item] = new THREE.CubicBezierCurve3(new THREE.Vector3(0, 0, 0), new THREE.Vector3(2, -1, 0), new THREE.Vector3(4, -2, 0), models[item].position);
+                pa[item] = new THREE.CubicBezierCurve3(new THREE.Vector3(0, 0, 0), new THREE.Vector3(0, -5, 0), new THREE.Vector3(5, -8, -5), models[item].position);
 
                 models[(item + 100)].geometry = new THREE.TubeGeometry(pa[item], tubularSegments, radius, radialSegments, false);
                 //console.log(pa);
@@ -123,11 +132,12 @@ function animation(time) {
             }
         });
     }
-    if (models[69] != null) { models[69].children[0].rotation.y = .5 * elapsedTime; }//rotate center skeleton
+    if (models[69] != null) { models[69].children[0].rotation.y += skelHover ? 0.1 : 0.05;models[69].children[0].rotation.x += skelHover ? 0.08 : 0; }//rotate center skeleton
 
+    controls.update();
 
     //RAYCAST/MOUSE HANDLING
-    handleRaycast();
+    handleRaycast();    
 
     //RENDER
     renderer.render(scene, camera);
@@ -137,22 +147,33 @@ function animation(time) {
 
 
 //Functions
-function handleRaycast(){
+function handleRaycast() {
     raycaster.setFromCamera(mouse, camera);
-    const intersects = raycaster.intersectObjects( scene.children );// calculate objects intersecting the picking ray
-    var newHover;
-    for ( let i = 0; i < intersects.length; i ++ ) {
+    const intersects = raycaster.intersectObjects(scene.children);// calculate objects intersecting the picking ray
+    //var newHover;
+    if (intersects.length === 0) { currentHover = null; }
+    for (let i = 0; i < intersects.length; i++) {
         //console.log(intersects[i].object.name?.includes("Text"));
-        if(intersects[i].object.name?.includes("Text")){
+        if (intersects[i].object.name?.includes("Text")) {
             // console.log(models)
             //console.log(intersects[i].object.id);
-            newHover = intersects[i].object.id;
-            console.log(textHitboxes[newHover]);
-        }                
+            currentHover = intersects[i].object.id;
+            break;
+        }
+        else {
+            currentHover = null;
+        }
     }
-    if(newHover != currentHover){
-        currentHover = newHover;
-    }    
+    if (models[69] != undefined) {
+        if (currentHover != null) {
+            models[69].children[0].material = skeletonHighlightMat;
+            skelHover = true;
+        }
+        else {
+            models[69].children[0].material = skeletonMat;
+            skelHover = false;
+        }
+    }
 }
 
 function onMouseMove(event) {
@@ -160,11 +181,19 @@ function onMouseMove(event) {
     mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
 }
 
-function onClick(event) {
+function mouseDown(event) {
     if (currentHover != null) {
-        console.log("Clicked on: " + currentHover);
-        window.open( 
+        mouseDownElement = currentHover;
+    }
+}
+
+function mouseUp(event) {
+    if (currentHover != null ) {
+        //console.log("Clicked on: " + currentHover);
+        if(currentHover == mouseDownElement){
+        window.open(
             links[textHitboxes[currentHover]], "_self");
+        }
     }
 }
 
@@ -181,8 +210,10 @@ function resize() {
     // Update sizes
     sizes.width = window.innerWidth
     sizes.height = window.innerHeight
-    //update eye scal
+    //update eye scale
     setEyeSizes();
+    //update scene
+    scene.scale.set(1.2,1.2,1.2);
     // Update camera
     camera.aspect = sizes.width / sizes.height
     camera.updateProjectionMatrix()
@@ -194,8 +225,12 @@ function resize() {
 function setEyeSizes() {
     eyeMeshes.forEach((item) => {
         if (models[item] != null) {
-            const newScale = sizes.width / 1000;
+            const newScale = 2;//sizes.width / 700;
             models[item].scale.set(newScale, newScale, newScale);
+            let radius = 10;
+            let angle = (2 * Math.PI) / eyeMeshes.length * (item - 1);
+            models[item].position.set(Math.sin(angle) * radius, 0, Math.cos(angle) * radius);
+            models[item].rotation.set(0, angle - (Math.PI / 2), 0);//Radians to degrees
         }
     });
 }
@@ -265,14 +300,24 @@ async function LoadText() {
         for (let i = 0; i < linkTitles.length; i++) {
             //console.log(i);
             let textGeometry = new TextGeometry(linkTitles[i], fontProps);
-            let textMesh = new THREE.Mesh(textGeometry, new THREE.MeshNormalMaterial());
+            let textMesh = new THREE.Mesh(textGeometry, meshNormalMat);
             textMesh.position.set(2, 0, 2);
             textMesh.rotation.set(0, 90, 0);
-            textMesh.name = "Text" + (i+1);
+            textMesh.name = "Text" + (i + 1);
             scene.add(textMesh);
             textHitboxes[textMesh.id] = i + 1;
             SetModel(textMesh, 201 + i);
             models[i + 1].add(textMesh);
         }
     });
+}
+
+function LoadCamera(){
+    gsap.to(camera.position, {
+        x:30,
+        y:0,
+        z:0,
+        ease: "sine.out",
+        duration: 1.5
+    })
 }

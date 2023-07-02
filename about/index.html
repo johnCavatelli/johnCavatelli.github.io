@@ -1,15 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />    
+    <link rel="icon" type="image/png" href="/resource/flower32.png" sizes="32x32">
+    <link rel="stylesheet" href="/resource/style.css">
     <title>AJ's Blog</title>
-</head>
-<body>
-    <a href="/index.html"><button id="home">Back Home</button></a>
-    <h1>Under construction</h1>
-    <h3>..go to the garden for now..</h3>
-    <img src="porygon.gif" alt="Porygon by https://www.deviantart.com/cortoony"/>
+    <script type="module" crossorigin src="about.js"></script>
+  </head>
+  <body>
     
-</body>
+    <script type="text/javascript" src="https://rawgit.com/patriciogonzalezvivo/glslCanvas/master/dist/GlslCanvas.js"></script>
+    <canvas class="glslCanvas" data-fragment-url="/circleBG.frag"></canvas>
+    <canvas class="glslCanvas" data-fragment-url="/noiseBG.frag" id="aboutInsetCanvas"></canvas>
+    <canvas class="webgl"></canvas>
+    <div id="aboutContent">
+        <div id="aboutContentBG">
+            <h1>Hello</h1>
+            <img src="/resource/dopeCrabPicture.jpg" class="bwImage">
+        </div>
+    </div>
+  </body>
 </html>

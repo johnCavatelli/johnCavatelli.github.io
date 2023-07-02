@@ -7,9 +7,9 @@ Most websites are pretty boring... spending 3 hours centering a div so that "The
 -Math for equally distributing eyes around the head
 -arrow key compatibility()
 -Scaling Of the eyes
-TODO:
 -Hover Effects
 -Zoom in at start
+TODO:
 -Add Tutorial Texture About Click and drag that disappears after rotate
 -About Page Background Shader
 -About Page Body

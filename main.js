@@ -213,7 +213,8 @@ function resize() {
     //update eye scale
     setEyeSizes();
     //update scene
-    scene.scale.set(1.2,1.2,1.2);
+    let sceneScale = 1 + (0.5 * (sizes.width/sizes.height));
+    scene.scale.set(sceneScale,sceneScale,sceneScale);
     // Update camera
     camera.aspect = sizes.width / sizes.height
     camera.updateProjectionMatrix()
@@ -316,7 +317,7 @@ function LoadCamera(){
     gsap.to(camera.position, {
         x:30,
         y:0,
-        z:0,
+        z:30,
         ease: "sine.out",
         duration: 1.5
     })

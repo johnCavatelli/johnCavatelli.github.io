@@ -128,6 +128,22 @@ a {
     margin-bottom: 10em;
 }
 
+
+.link{
+    text-decoration: none;
+    font-size: 2.5em;
+    letter-spacing: -3px;
+    -webkit-filter: grayscale(100%);
+   filter: grayscale(100%);
+   transition: 700ms ease;
+}
+
+.link:hover{
+    font-size: 3em;
+    letter-spacing: 3px;
+    text-decoration: dotted underline;
+}
+
 #gallery {
     display: flex;
     width: 100%;

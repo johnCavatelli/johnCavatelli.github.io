@@ -9,13 +9,12 @@ Most websites are pretty boring... spending 3 hours centering a div so that "The
 -Scaling Of the eyes
 -Hover Effects
 -Zoom in at start
--Add Tutorial Texture About Click and drag that disappears after rotate
-TODO:
 -About Page Background Shader
 -About Page Body
 -Blog Background Shader
 -Blog Page
-
+TODO:
+-Add Tutorial Texture About Click and drag that disappears after rotate
 -Touch support for Garden
 
 To Run Locally:

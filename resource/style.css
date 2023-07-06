@@ -110,3 +110,29 @@ button:hover {
   transform: scale(1.05);
   will-change: transform;
 }
+
+
+#tutorial-div {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100vh;
+}
+
+#tutorial {
+  opacity: 1;
+  font-size: 2.5em;
+  transition: opacity 0.5s ease;
+  color: white;
+}
+
+@media screen and (max-width: 600px) {
+ #tutorial{
+  font-size: 1.5em;
+ }
+}
+
+body {
+  font-family: 'Quicksand', sans-serif;
+  font-family: 'Source Code Pro', monospace;
+}

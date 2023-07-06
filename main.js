@@ -10,7 +10,7 @@ import { FontLoader } from 'three/addons/loaders/FontLoader.js';
 const bg = document.getElementsByClassName('glslCanvas')[0];
 bg.width = window.innerWidth;
 bg.height = window.innerHeight;
-//Start Load ing Assets
+//Start Loading Assets
 const loadingManager = new THREE.LoadingManager();//loading screen manager
 loadingManager.onStart = function (url, item, total) { }
 loadingManager.onLoad = function () { }
@@ -50,17 +50,6 @@ await CreateTubeMeshes();
 //Lights
 const dirLight = new THREE.DirectionalLight(0xffffff);
 dirLight.position.set(- 3, 10, - 10);
-/*
-dirLight.castShadow = true;
-dirLight.shadow.camera.top = 2;
-dirLight.shadow.camera.bottom = -5;
-dirLight.shadow.camera.left = -10;
-dirLight.shadow.camera.right = 10;
-dirLight.shadow.camera.near = 0.1;
-dirLight.shadow.camera.far = 40;
-dirLight.shadow.mapSize.width = 2048;
-dirLight.shadow.mapSize.height = 2048;
-*/
 scene.add(dirLight);
 const hemiLight = new THREE.HemisphereLight(0xeef0c0, 0x444444, 1.2);
 hemiLight.position.set(0, 20, 0);
@@ -75,6 +64,7 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setAnimationLoop(animation);
 
 // Instantiate new classes
+var tutorialActive = true;
 const perlin = new Perlin(Math.random());
 const clock = new THREE.Clock();
 raycaster = new THREE.Raycaster();
@@ -100,8 +90,6 @@ controls.update();
 
 let lateLoadComplete = false;//Flag to load things after models have been loaded
 function animation(time) {
-    //console.log(models);
-
     //MODELS ANIMATION
     const elapsedTime = clock.getElapsedTime();
     if (typeof models[3] !== "undefined") {
@@ -110,6 +98,17 @@ function animation(time) {
             LoadText();
             resize();
             LoadCamera();
+        }
+        if (tutorialActive) {
+            if (controls.getAzimuthalAngle() > 1.6 || controls.getAzimuthalAngle() < 0.7) {
+                const tutorialElement = document.getElementById("tutorial");
+                tutorialElement.style.opacity = '0';
+                setTimeout(function () {
+                    tutorialElement.style.display = 'none';
+                }, 500); // Fade out duration in milliseconds (0.5 seconds in this case)
+                tutorialActive = false;
+                console.log("hid");
+            }
         }
         //models[2].children[0].rotation.y = 5.2 * perlin.get3(new THREE.Vector3(elapsedTime,0,0));
         let tubularSegments = 20,
@@ -132,12 +131,12 @@ function animation(time) {
             }
         });
     }
-    if (models[69] != null) { models[69].children[0].rotation.y += skelHover ? 0.1 : 0.05;models[69].children[0].rotation.x += skelHover ? 0.08 : 0; }//rotate center skeleton
+    if (models[69] != null) { models[69].children[0].rotation.y += skelHover ? 0.1 : 0.05; models[69].children[0].rotation.x += skelHover ? 0.08 : 0; }//rotate center skeleton
 
     controls.update();
 
     //RAYCAST/MOUSE HANDLING
-    handleRaycast();    
+    handleRaycast();
 
     //RENDER
     renderer.render(scene, camera);
@@ -188,11 +187,11 @@ function mouseDown(event) {
 }
 
 function mouseUp(event) {
-    if (currentHover != null ) {
+    if (currentHover != null) {
         //console.log("Clicked on: " + currentHover);
-        if(currentHover == mouseDownElement){
-        window.open(
-            links[textHitboxes[currentHover]], "_self");
+        if (currentHover == mouseDownElement) {
+            window.open(
+                links[textHitboxes[currentHover]], "_self");
         }
     }
 }
@@ -213,8 +212,8 @@ function resize() {
     //update eye scale
     setEyeSizes();
     //update scene
-    let sceneScale = 1 + (0.5 * (sizes.width/sizes.height));
-    scene.scale.set(sceneScale,sceneScale,sceneScale);
+    let sceneScale = 1 + (0.5 * (sizes.width / sizes.height));
+    scene.scale.set(sceneScale, sceneScale, sceneScale);
     // Update camera
     camera.aspect = sizes.width / sizes.height
     camera.updateProjectionMatrix()
@@ -313,11 +312,11 @@ async function LoadText() {
     });
 }
 
-function LoadCamera(){
+function LoadCamera() {
     gsap.to(camera.position, {
-        x:30,
-        y:0,
-        z:30,
+        x: 30,
+        y: 0,
+        z: 30,
         ease: "sine.out",
         duration: 1.5
     })

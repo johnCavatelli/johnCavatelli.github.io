@@ -4,18 +4,6 @@ Most websites are pretty boring... spending 3 hours centering a div so that "The
 
 ## Built using Three.js and shaders written in GLSL
 
--Math for equally distributing eyes around the head
--arrow key compatibility()
--Scaling Of the eyes
--Hover Effects
--Zoom in at start
--About Page Background Shader
--About Page Body
--Blog Background Shader
--Blog Page
-TODO:
--Add Tutorial Texture About Click and drag that disappears after rotate
--Touch support for Garden
 
 To Run Locally:
 Clone Repo > open folder > npm i > npm run dev <3
@@ -27,3 +15,19 @@ The 'public' folder holds assets that need to be included, but aren't detected b
 
 Credits (Assets Used):
 Skeleton Model: https://opengameart.org/content/skeleton-with-rig
+
+
+
+BackLog
+-Math for equally distributing eyes around the head
+-arrow key compatibility()
+-Scaling Of the eyes
+-Hover Effects
+-Zoom in at start
+-About Page Background Shader
+-About Page Body
+-Blog Background Shader
+-Blog Page
+-Add Tutorial Texture About Click and drag that disappears after rotate
+TODO:
+-Touch support for Garden

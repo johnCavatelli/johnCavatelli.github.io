@@ -27,8 +27,8 @@ const gltfLoader = new GLTFLoader(loadingManager);
 //Geometry
 var models = {};
 var textHitboxes = {};
-const linkTitles = ['about', 'garden', 'blog'];//art games contact
-const links = ["aj is really stupid for indexing at 1", "/about/index.html", "/garden/index.html", "/blog/index.html"]
+const linkTitles = ['about', 'garden', 'korea'];//art games contact
+const links = ["aj is really stupid for indexing at 1", "/about/index.html", "/garden/index.html", "/korea/index.html"]
 const meshNormalMat = new THREE.MeshNormalMaterial();
 const centerBox = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), meshNormalMat);
 centerBox.position.set(0, 0, 0);

@@ -10,6 +10,7 @@ export default defineConfig({
         garden: resolve(__dirname, 'garden/index.html'),
         about: resolve(__dirname, 'about/index.html'),
         blog: resolve(__dirname, 'blog/index.html'),
+        korea: resolve(__dirname, 'korea/index.html'),
       },
     },
   },

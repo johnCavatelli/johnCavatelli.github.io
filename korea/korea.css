@@ -59,6 +59,11 @@
 	}
 }
 
+.imgModal{
+  width: 95%;
+  height: 95%;
+}
+
 .outer-div {
   display: flex;
   justify-content: center;

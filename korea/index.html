@@ -14,16 +14,12 @@
 </head>
 
 <body>
-
-    <!-- <script type="text/javascript" src="https://rawgit.com/patriciogonzalezvivo/glslCanvas/master/dist/GlslCanvas.js"></script>
-    <canvas class="glslCanvas" data-fragment-url="/blogBG.frag"></canvas>
-    <canvas class="webgl"></canvas>
-    <div class="center-container">
-        <h1>There's nothing here</h1>
-        <span class="br"></span>
-        <a href="/index.html">&lt;- back home</a>
-    </div> -->
-
+    <dialog id="imgModal">
+        <img id="large-img">
+        <button id="close-modal-button" class="btn">close</button>
+        <button id="left-modal-button" class="btn">prev</button>
+        <button id="right-modal-button"  class="btn">next</button>
+    </dialog>
     <div id='bg_img'>
         <a href="/index.html">&lt;- back home</a>
         <p id="title">
@@ -40,25 +36,37 @@
             </span>
         </div>
         <div id="top-bar-subdiv-right">
-            <button>4</button>
-            <button>9</button>
-            <button>18</button>
+            <button class="btn">4</button>
+            <button class="btn">9</button>
+            <button class="btn">18</button>
             <img src="../resource/SHOW.png">
         </div>
     </div>
+    <div id="pictures">
+        <div class="picture"><img id = "thmb0"></div>
+        <div class="picture"><img id = "thmb1"></div>
+        <div class="picture"><img id = "thmb2"></div>
+        <div class="picture"><img id = "thmb3"></div>
+        <div class="picture"><img id = "thmb4"></div>
+        <div class="picture"><img id = "thmb5"></div>
+        <div class="picture"><img id = "thmb6"></div>
+        <div class="picture"><img id = "thmb7"></div>
+        <div class="picture"><img id = "thmb8"></div>
+    </div>
     <div id="top-bar">
         <div id="top-bar-subdiv-left">
-            <span>즐겨찾는 사진</span>
+            <span>메뉴</span>
             <span>
                 <img src="../resource/menu.png" class="menu-icon">
             </span>
         </div>
         <div id="top-bar-subdiv-right">
-            <button>&lt;-</button>
-            <button>-&gt;</button>
-           
+            <button class="btn" id="lbutton">&lt;-</button>
+            <button class="btn" id="rbutton">-&gt;</button>
         </div>
     </div>
+
+    <script type="module" src="korea.js"></script>
 </body>
 
 </html>

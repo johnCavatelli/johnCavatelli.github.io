@@ -54,7 +54,6 @@
 	text-transform: uppercase;
 	width: auto;
 	
-	&:focus,
 	&:hover {
 		background: #BCBCBC;
 	}

@@ -11,11 +11,21 @@ const imageModal = document.getElementById("imgModal");
 const closeModalButton = document.getElementById("close-modal-button");
 const leftModalButton = document.getElementById("left-modal-button");
 const rightModalButton = document.getElementById("right-modal-button");
+const fourButton = document.getElementById("4btn");
+const tenButton = document.getElementById("10btn");
+const twentyButton = document.getElementById("20btn");
+const imageDateField = document.getElementById("img-date");
+const imageNameField = document.getElementById("img-name");
+const imageNicknameField = document.getElementById("img-nickname");
+const imageTagsField = document.getElementById("img-tags");
 left_button.addEventListener("click", function(){PageBackward()});
 right_button.addEventListener("click", function(){PageForward()});
 closeModalButton.addEventListener("click", function(){CloseImageModal()});
 leftModalButton.addEventListener("click", function(){ModalImageBackward()});
 rightModalButton.addEventListener("click", function(){ModalImageForward()});
+twentyButton.addEventListener("click",function(){ChangePicsPerPage(20)});
+fourButton.addEventListener("click",function(){ChangePicsPerPage(4)});
+tenButton.addEventListener("click",function(){ChangePicsPerPage(10)});
 
 Startup();
 
@@ -24,14 +34,28 @@ function Startup() {
         .then(response => {
             metadata = response;
             numPics = Object.keys(metadata).length;
-            //console.log(JSON.stringify(metadata));
+            console.log(JSON.stringify(metadata));
             //console.log("Pictures on site: " + numPics);
             GetPageThumbnails();
-            for(let i=0;i<9;i++){
+            for(let i=0;i<20;i++){
                 const butt = document.getElementById("thmb" + i);
                 butt.addEventListener("click", function(){LoadImageModal(i)});
             }
         })
+}
+
+function ChangePicsPerPage(i){
+    picsPerPage = i;
+    GetPageThumbnails();
+}
+
+function GetPictureInfo(index){
+    var key = Object.keys(metadata)[index];
+    console.log(metadata[key]);
+    imageDateField.innerHTML = metadata[key].date ? metadata[key].date : "undated";
+    imageNameField.innerHTML = metadata[key].name ? metadata[key].name : "unnamed";
+    imageNicknameField.innerHTML = metadata[key].nickname ? metadata[key].nickname : "nonick";
+    imageTagsField.innerHTML = metadata[key].tags ? metadata[key].tags : "notags";
 }
 
 function ModalImageForward(){
@@ -41,6 +65,7 @@ function ModalImageForward(){
             PageForward();
         }
         GetImage(nextPicture);
+        GetPictureInfo(nextPicture);
         currentImage++;
     }
 }
@@ -52,6 +77,7 @@ function ModalImageBackward(){
             PageBackward();
         }
         GetImage(prevPicture);
+        GetPictureInfo(prevPicture);
         currentImage--;
     }
 }
@@ -67,6 +93,7 @@ function LoadImageModal(index){
     const startIndex = pageIndex * picsPerPage;
     currentImage = index + startIndex
     GetImage(currentImage);
+    GetPictureInfo(currentImage);
     imageModal.showModal();
 }
 
@@ -112,7 +139,7 @@ function GetThumb(index) {
 }
 
 function ClearBlankThumbnails(startIndex){
-    for (let i = startIndex; i < 18; i++) {
+    for (let i = startIndex; i < 20; i++) {
         var _img = document.getElementById('thmb'+ (i));
         _img.setAttribute('src', '');
     }
@@ -126,4 +153,5 @@ function GetPageThumbnails() {
             break;
         }
     }
+    ClearBlankThumbnails(picsPerPage);
 }

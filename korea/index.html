@@ -15,10 +15,18 @@
 
 <body>
     <dialog id="imgModal">
-        <img id="large-img" style="width: 95%;">
-        <button id="close-modal-button" class="btn">close</button>
-        <button id="left-modal-button" class="btn">prev</button>
-        <button id="right-modal-button"  class="btn">next</button>
+        <div id="modalDiv">
+            <img id="large-img" style="width: 95%;">
+            <div>
+                <p id="img-date">08/01/2023 10:51</p>
+                <p id="img-name">0240.JPG</p>
+                <p id="img-nickname">kpop-demise</p>
+                <p id="img-tags">tags: </p>
+            </div>
+            <button id="close-modal-button" class="btn">close</button>
+            <button id="left-modal-button" class="btn">prev</button>
+            <button id="right-modal-button" class="btn">next</button>
+        </div>
     </dialog>
     <div id='bg_img'>
         <a href="/index.html">&lt;- back home</a>
@@ -36,22 +44,33 @@
             </span>
         </div>
         <div id="top-bar-subdiv-right">
-            <button class="btn">4</button>
-            <button class="btn">9</button>
-            <button class="btn">18</button>
+            <button class="btn" id="4btn">4</button>
+            <button class="btn" id="10btn">10</button>
+            <button class="btn" id="20btn">20</button>
             <img src="../resource/SHOW.png">
         </div>
     </div>
-    <div id="pictures">
-        <div class="picture"><img id = "thmb0"></div>
-        <div class="picture"><img id = "thmb1"></div>
-        <div class="picture"><img id = "thmb2"></div>
-        <div class="picture"><img id = "thmb3"></div>
-        <div class="picture"><img id = "thmb4"></div>
-        <div class="picture"><img id = "thmb5"></div>
-        <div class="picture"><img id = "thmb6"></div>
-        <div class="picture"><img id = "thmb7"></div>
-        <div class="picture"><img id = "thmb8"></div>
+    <div id="picture-gallery">
+        <div class="picture"><img class="thumb" id="thmb0"></div>
+        <div class="picture"><img class="thumb" id="thmb1"></div>
+        <div class="picture"><img class="thumb" id="thmb2"></div>
+        <div class="picture"><img class="thumb" id="thmb3"></div>
+        <div class="picture"><img class="thumb" id="thmb4"></div>
+        <div class="picture"><img class="thumb" id="thmb5"></div>
+        <div class="picture"><img class="thumb" id="thmb6"></div>
+        <div class="picture"><img class="thumb" id="thmb7"></div>
+        <div class="picture"><img class="thumb" id="thmb8"></div>
+        <div class="picture"><img class="thumb" id="thmb9"></div>
+        <div class="picture"><img class="thumb" id="thmb10"></div>
+        <div class="picture"><img class="thumb" id="thmb11"></div>
+        <div class="picture"><img class="thumb" id="thmb12"></div>
+        <div class="picture"><img class="thumb" id="thmb13"></div>
+        <div class="picture"><img class="thumb" id="thmb14"></div>
+        <div class="picture"><img class="thumb" id="thmb15"></div>
+        <div class="picture"><img class="thumb" id="thmb16"></div>
+        <div class="picture"><img class="thumb" id="thmb17"></div>
+        <div class="picture"><img class="thumb" id="thmb18"></div>
+        <div class="picture"><img class="thumb" id="thmb19"></div>
     </div>
     <div id="top-bar">
         <div id="top-bar-subdiv-left">

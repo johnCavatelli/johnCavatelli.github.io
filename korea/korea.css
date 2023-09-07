@@ -19,6 +19,10 @@ a {
 
 body {
   font-family: 'VT323', monospace;
+  background-image:
+    url('../resource/nighttime.png');
+  background-position: center;
+  background-repeat: repeat;
 }
 
 #top-bar {
@@ -70,10 +74,6 @@ body {
   flex-direction: column;
 }
 
-#imgModal {
-
-}
-
 #picture-gallery {
   width: 100%;
   display: flex;
@@ -84,26 +84,11 @@ body {
 
 .picture {
   width: fit-content;
-  margin: 1em;
+  margin: 0.1em;
 }
 
 .thumb {
-  width: 300px;
-}
-
-
-.outer-div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 300px;
-  /* Set the desired height */
-  border: 1px solid #ccc;
-  /* Optional border for visualization */
-}
-
-.inner-div {
-  text-align: center;
+  width: 100px;
 }
 
 .menu-icon {
@@ -136,4 +121,107 @@ body {
   font-variation-settings: "wght" 682;
   font-size: 6em;
   letter-spacing: 3px;
+}
+
+#spin-cam {
+  /* width: 600px;
+  height: 600px; */
+  font-size:30px;
+  color: #fff;
+  background: none;
+  border: none;
+  border-radius: 50%; 
+  position: relative;
+  z-index: 0;
+  transition: .3s;
+  cursor: pointer;
+}
+#spin-cam:before {
+  content: "";
+  position: absolute;
+  inset: -8px;
+  padding: 10px;
+  border-radius: 50%; 
+  background: conic-gradient(
+        #ff53bb ,
+        #0000 30deg 120deg,
+        #00f8d3 150deg 180deg,
+        #0000 210deg 300deg,
+        #ff53bb 330deg
+    );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: intersect
+}
+#spin-cam:after {
+  content: "";
+  position: absolute;
+  inset: -100px;
+  background:
+    radial-gradient(200px at left  400px top 150px,#ff53bb 100%,#0000),
+    radial-gradient(200px at right 400px bottom 150px,#00f8d3 100%,#0000);
+  filter: blur(120px);
+  opacity: .5;
+}
+
+#spin-cam:before,
+#spin-cam:after {
+  transition:.5s, 99999s 99999s transform;
+}
+#spin-cam:hover {
+  box-shadow: 0 0 0 1px #666;
+}
+
+#spin-cam:hover:before,
+#spin-cam:hover:after {
+  transform: rotate(36000deg);
+  transition: .5s,600s linear transform;
+}
+#spin-cam:before {
+  background-color: #222;
+    border: 2px solid #333;
+}
+
+#spin-cam>img{
+    border-radius: 50%;
+    left: -2px;
+    position: relative;
+    top: 2px;
+    /* width: 594px; */
+    opacity:0.9;
+}
+
+td{
+  width: 100%;
+}
+
+table.mainTable {
+  border: 7px solid #F6DCFF;
+  background-color: #130D19;
+  text-align: center;
+  border-collapse: collapse;
+}
+table.mainTable td, table.mainTable th {
+  border: 4px solid #876DAA;
+  padding: 6px 5px;
+}
+table.mainTable tbody td {
+  font-size: 22px;
+  color: #FFFFFF;
+}
+table.mainTable tr:nth-child(even) {
+  background: #4D0C7F;
+}
+table.mainTable thead {
+  background: #AF31AD;
+  background: -moz-linear-gradient(top, #c364c1 0%, #b745b5 66%, #AF31AD 100%);
+  background: -webkit-linear-gradient(top, #c364c1 0%, #b745b5 66%, #AF31AD 100%);
+  background: linear-gradient(to bottom, #c364c1 0%, #b745b5 66%, #AF31AD 100%);
+}
+table.mainTable thead th {
+  font-size: 30px;
+  font-weight: bold;
+  color: #F8EDFF;
 }

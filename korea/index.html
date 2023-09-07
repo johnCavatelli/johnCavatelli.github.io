@@ -14,77 +14,81 @@
 </head>
 
 <body>
-    <dialog id="imgModal">
-        <div id="modalDiv">
-            <img id="large-img" style="width: 95%;">
-            <div>
-                <p id="img-date">08/01/2023 10:51</p>
-                <p id="img-name">0240.JPG</p>
-                <p id="img-nickname">kpop-demise</p>
-                <p id="img-tags">tags: </p>
-            </div>
-            <button id="close-modal-button" class="btn">close</button>
-            <button id="left-modal-button" class="btn">prev</button>
-            <button id="right-modal-button" class="btn">next</button>
-        </div>
-    </dialog>
-    <div id='bg_img'>
-        <a href="/index.html">&lt;- back home</a>
-        <p id="title">
-            PICTURES<br>
-            FROM<br>
-            KOREA
-        </p>
-    </div>
-    <div id="top-bar">
-        <div id="top-bar-subdiv-left">
-            <span>즐겨찾는 사진</span>
-            <span>
-                <img src="../resource/fav.png" class="menu-icon">
-            </span>
-        </div>
-        <div id="top-bar-subdiv-right">
-            <button class="btn" id="4btn">4</button>
-            <button class="btn" id="10btn">10</button>
-            <button class="btn" id="20btn">20</button>
-            <img src="../resource/SHOW.png">
-        </div>
-    </div>
-    <div id="picture-gallery">
-        <div class="picture"><img class="thumb" id="thmb0"></div>
-        <div class="picture"><img class="thumb" id="thmb1"></div>
-        <div class="picture"><img class="thumb" id="thmb2"></div>
-        <div class="picture"><img class="thumb" id="thmb3"></div>
-        <div class="picture"><img class="thumb" id="thmb4"></div>
-        <div class="picture"><img class="thumb" id="thmb5"></div>
-        <div class="picture"><img class="thumb" id="thmb6"></div>
-        <div class="picture"><img class="thumb" id="thmb7"></div>
-        <div class="picture"><img class="thumb" id="thmb8"></div>
-        <div class="picture"><img class="thumb" id="thmb9"></div>
-        <div class="picture"><img class="thumb" id="thmb10"></div>
-        <div class="picture"><img class="thumb" id="thmb11"></div>
-        <div class="picture"><img class="thumb" id="thmb12"></div>
-        <div class="picture"><img class="thumb" id="thmb13"></div>
-        <div class="picture"><img class="thumb" id="thmb14"></div>
-        <div class="picture"><img class="thumb" id="thmb15"></div>
-        <div class="picture"><img class="thumb" id="thmb16"></div>
-        <div class="picture"><img class="thumb" id="thmb17"></div>
-        <div class="picture"><img class="thumb" id="thmb18"></div>
-        <div class="picture"><img class="thumb" id="thmb19"></div>
-    </div>
-    <div id="top-bar">
-        <div id="top-bar-subdiv-left">
-            <span>메뉴</span>
-            <span>
-                <img src="../resource/menu.png" class="menu-icon">
-            </span>
-        </div>
-        <div id="top-bar-subdiv-right">
-            <button class="btn" id="lbutton">&lt;-</button>
-            <button class="btn" id="rbutton">-&gt;</button>
-        </div>
-    </div>
-
+    <table class="mainTable">
+        <tbody>
+            <th>
+                <h2> Remembering is a beautiful thing</h2>
+            </th>
+            <tr>
+                <td>
+                    <h1 id="title">Pictures From Korea</h1>
+                    <button id="spin-cam"><img src="/resource/cam.gif"></button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h2>Welcome Travler: You are visitor number</h2>
+                    <script type="text/javascript" src="//counter.websiteout.net/js/2/6/0/1"></script>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <img id="main-img">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p id="img-date">08/01/2023 10:51</p>
+                    <p id="img-name">0240.JPG</p>
+                    <p id="img-nickname">kpop-demise</p>
+                    <p id="img-tags">tags: </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button id="left-img-button">prev</button>
+                    <button id="right-img-button">next</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div id="picture-gallery">
+                        <div class="picture"><img class="thumb" id="thmb0"></div>
+                        <div class="picture"><img class="thumb" id="thmb1"></div>
+                        <div class="picture"><img class="thumb" id="thmb2"></div>
+                        <div class="picture"><img class="thumb" id="thmb3"></div>
+                        <div class="picture"><img class="thumb" id="thmb4"></div>
+                        <div class="picture"><img class="thumb" id="thmb5"></div>
+                        <div class="picture"><img class="thumb" id="thmb6"></div>
+                        <div class="picture"><img class="thumb" id="thmb7"></div>
+                        <div class="picture"><img class="thumb" id="thmb8"></div>
+                        <div class="picture"><img class="thumb" id="thmb9"></div>
+                        <div class="picture"><img class="thumb" id="thmb10"></div>
+                        <div class="picture"><img class="thumb" id="thmb11"></div>
+                        <div class="picture"><img class="thumb" id="thmb12"></div>
+                        <div class="picture"><img class="thumb" id="thmb13"></div>
+                        <div class="picture"><img class="thumb" id="thmb14"></div>
+                        <div class="picture"><img class="thumb" id="thmb15"></div>
+                        <div class="picture"><img class="thumb" id="thmb16"></div>
+                        <div class="picture"><img class="thumb" id="thmb17"></div>
+                        <div class="picture"><img class="thumb" id="thmb18"></div>
+                        <div class="picture"><img class="thumb" id="thmb19"></div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="controls-container">
+                        <button id="l-button">left page</button>
+                        <button id="r-button">right page</button>
+                        <button id="4btn">4</button>
+                        <button id="10btn">10</button>
+                        <button id="20btn">20</button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
     <script type="module" src="korea.js"></script>
 </body>
 

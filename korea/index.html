@@ -14,10 +14,13 @@
 </head>
 
 <body>
+    <script type="text/javascript" src="https://rawgit.com/patriciogonzalezvivo/glslCanvas/master/dist/GlslCanvas.js"></script>
+    <canvas class="glslCanvas" data-fragment-url="/bayer.frag"></canvas>
+    <div class="center-container">
     <table class="mainTable">
         <tbody>
             <th>
-                <h2> Remembering is a beautiful thing</h2>
+                <marquee id="scroll-text">remembering-is-a-beautiful-thing </marquee>
             </th>
             <tr>
                 <td>
@@ -25,12 +28,7 @@
                     <button id="spin-cam"><img src="/resource/cam.gif"></button>
                 </td>
             </tr>
-            <tr>
-                <td>
-                    <h2>Welcome Travler: You are visitor number</h2>
-                    <script type="text/javascript" src="//counter.websiteout.net/js/2/6/0/1"></script>
-                </td>
-            </tr>
+            
             <tr>
                 <td>
                     <img id="main-img">
@@ -46,8 +44,8 @@
             </tr>
             <tr>
                 <td>
-                    <button id="left-img-button">prev</button>
-                    <button id="right-img-button">next</button>
+                    <button id="left-img-button" class="btn">prev</button>
+                    <button id="right-img-button" class="btn">next</button>
                 </td>
             </tr>
             <tr>
@@ -79,16 +77,23 @@
             <tr>
                 <td>
                     <div class="controls-container">
-                        <button id="l-button">left page</button>
-                        <button id="r-button">right page</button>
-                        <button id="4btn">4</button>
-                        <button id="10btn">10</button>
-                        <button id="20btn">20</button>
+                        <button id="l-button" class="btn">left page</button>
+                        <button id="r-button" class="btn">right page</button>
+                        <button id="4btn" class="btn">4</button>
+                        <button id="10btn" class="btn">10</button>
+                        <button id="20btn" class="btn">20</button>
                     </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h2>Welcome Travler: You are visitor number</h2>
+                    <script type="text/javascript" src="//counter.websiteout.net/js/2/6/0/1"></script>
                 </td>
             </tr>
         </tbody>
     </table>
+    </div>
     <script type="module" src="korea.js"></script>
 </body>
 

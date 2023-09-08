@@ -8,7 +8,6 @@ body,
 html {
   height: 100%;
   overflow-x: hidden;
-  background: black;
   color: white;
 }
 
@@ -19,10 +18,6 @@ a {
 
 body {
   font-family: 'VT323', monospace;
-  background-image:
-    url('../resource/nighttime.png');
-  background-position: center;
-  background-repeat: repeat;
 }
 
 #top-bar {
@@ -45,6 +40,17 @@ body {
   width: 50%;
 }
 
+#scroll-text{
+  font-size: 2em;
+  color: #D81E5B;
+}
+
+.center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Ensure container fills the entire viewport height */
+}
 
 .btn {
   background: #5a4e4e;
@@ -111,17 +117,29 @@ body {
 }
 
 #title {
-  font-size: 5em;
-  letter-spacing: 6px;
+  font-size: 3em;
+  letter-spacing: 2px;
   transition: 700ms ease;
   font-variation-settings: "wght" 311;
 }
 
-#title:hover {
+.glslCanvas {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -2;
+  pointer-events: none;
+}
+
+/* #title:hover {
   font-variation-settings: "wght" 682;
   font-size: 6em;
   letter-spacing: 3px;
-}
+} */
 
 #spin-cam {
   /* width: 600px;
@@ -143,11 +161,11 @@ body {
   padding: 10px;
   border-radius: 50%; 
   background: conic-gradient(
-        #ff53bb ,
+        #D81E5B ,
         #0000 30deg 120deg,
-        #00f8d3 150deg 180deg,
+        #0025f8 150deg 180deg,
         #0000 210deg 300deg,
-        #ff53bb 330deg
+        #D81E5B 330deg
     );
   -webkit-mask:
     linear-gradient(#000 0 0) content-box,
@@ -193,18 +211,24 @@ body {
     opacity:0.9;
 }
 
+#main-img{
+  max-width: 90%;
+}
+
 td{
   width: 100%;
 }
 
 table.mainTable {
-  border: 7px solid #F6DCFF;
-  background-color: #130D19;
+  border: 7px solid #D81E5B;
+  background-color: #a4a5ae6c;
   text-align: center;
   border-collapse: collapse;
+  width: 95%;
+  max-width: 1100px;
 }
 table.mainTable td, table.mainTable th {
-  border: 4px solid #876DAA;
+  border: 4px solid #D81E5B;
   padding: 6px 5px;
 }
 table.mainTable tbody td {
@@ -212,10 +236,10 @@ table.mainTable tbody td {
   color: #FFFFFF;
 }
 table.mainTable tr:nth-child(even) {
-  background: #4D0C7F;
+  background: #294D4A;
 }
 table.mainTable thead {
-  background: #AF31AD;
+  background: #D81E5B;
   background: -moz-linear-gradient(top, #c364c1 0%, #b745b5 66%, #AF31AD 100%);
   background: -webkit-linear-gradient(top, #c364c1 0%, #b745b5 66%, #AF31AD 100%);
   background: linear-gradient(to bottom, #c364c1 0%, #b745b5 66%, #AF31AD 100%);

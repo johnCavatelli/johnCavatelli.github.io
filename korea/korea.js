@@ -5,6 +5,11 @@ var currentImage = 0;
 var metadata;
 var numPics;
 
+//glsl canvas setup
+const bg = document.getElementsByClassName('glslCanvas')[0];
+bg.width = window.innerWidth;
+bg.height = window.innerHeight;
+
 const leftPagebutton = document.getElementById("l-button");
 const rightPagebutton = document.getElementById("r-button");
 const leftImageButton = document.getElementById("left-img-button");
@@ -31,7 +36,7 @@ function Startup() {
         .then(response => {
             metadata = response;
             numPics = Object.keys(metadata).length;
-            console.log(JSON.stringify(metadata));
+            // console.log(JSON.stringify(metadata));
             //console.log("Pictures on site: " + numPics);
             GetPageThumbnails();
             GetImage(4);
@@ -109,7 +114,7 @@ function PageBackward(){
 
 function GetImage(index) {
     var key = Object.keys(metadata)[index];
-    console.log(key + " index: " + index);
+    // console.log(key + " index: " + index);
     if (key == null){return false;}
     var _img = document.getElementById('main-img');
     var newImg = new Image;
@@ -123,7 +128,7 @@ function GetImage(index) {
 
 function GetThumb(index) {
     var key = Object.keys(metadata)[index];
-    console.log(key + " index: " + index);
+    // console.log(key + " index: " + index);
     if (key == null){return false;}
     var _img = document.getElementById('thmb'+ (index%picsPerPage));
     var newImg = new Image;

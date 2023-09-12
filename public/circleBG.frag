@@ -60,4 +60,5 @@ void main()
     vec3 c7 = renderWavyCircle(ogUV,0.3,17.,vec2(-0.5,-0.5),c6) + c6;
     vec3 c8 = renderWavyCircle(ogUV,0.2,90.,vec2(-1.3,0.),c7) + c7;        
     gl_FragColor = vec4( c8,1.0);
+    //gl_FragColor = vec4(0.,1.,0.,1.);
 }

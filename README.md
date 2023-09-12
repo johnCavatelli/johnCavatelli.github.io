@@ -13,6 +13,9 @@ To deploy simply push up code and trigger github action. Vite packages it all up
 Notes (For future AJ):
 The 'public' folder holds assets that need to be included, but aren't detected by Vite to include.
 
+To Add New Page:
+Create named folder with index.html file. Add name of folder to vite.config.ts
+
 Credits (Assets Used):
 Skeleton Model: https://opengameart.org/content/skeleton-with-rig
 

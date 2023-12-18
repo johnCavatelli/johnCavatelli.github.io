@@ -1,8 +1,8 @@
-
 var pageIndex = 0;
-var picsPerPage = 4;
+var picsPerPage = 20;
 var currentImage = 0;
 var metadata;
+var metadataKeys;
 var numPics;
 
 //glsl canvas setup
@@ -19,15 +19,15 @@ const tenButton = document.getElementById("10btn");
 const twentyButton = document.getElementById("20btn");
 const imageDateField = document.getElementById("img-date");
 const imageNameField = document.getElementById("img-name");
-const imageNicknameField = document.getElementById("img-nickname");
-const imageTagsField = document.getElementById("img-tags");
-leftPagebutton.addEventListener("click", function(){PageBackward()});
-rightPagebutton.addEventListener("click", function(){PageForward()});
-leftImageButton.addEventListener("click", function(){MainImageBackward()});
-rightImageButton.addEventListener("click", function(){MainImageForward()});
-twentyButton.addEventListener("click",function(){ChangePicsPerPage(20)});
-fourButton.addEventListener("click",function(){ChangePicsPerPage(4)});
-tenButton.addEventListener("click",function(){ChangePicsPerPage(10)});
+// const imageNicknameField = document.getElementById("img-nickname");
+// const imageTagsField = document.getElementById("img-tags");
+leftPagebutton.addEventListener("click", function () { PageBackward() });
+rightPagebutton.addEventListener("click", function () { PageForward() });
+leftImageButton.addEventListener("click", function () { MainImageBackward() });
+rightImageButton.addEventListener("click", function () { MainImageForward() });
+twentyButton.addEventListener("click", function () { ChangePicsPerPage(20) });
+fourButton.addEventListener("click", function () { ChangePicsPerPage(4) });
+tenButton.addEventListener("click", function () { ChangePicsPerPage(10) });
 
 Startup();
 
@@ -36,36 +36,39 @@ function Startup() {
         .then(response => {
             metadata = response;
             numPics = Object.keys(metadata).length;
-            // console.log(JSON.stringify(metadata));
+            metadataKeys = Object.keys(metadata);
+            metadataKeys.sort((a, b) => parseInt(a) - parseInt(b));
+            
+            // console.log(metadataKeys);
             //console.log("Pictures on site: " + numPics);
             GetPageThumbnails();
-            GetImage(4);
-            for(let i=0;i<20;i++){
+            GetImage(0);
+            for (let i = 0; i < 20; i++) {
                 const butt = document.getElementById("thmb" + i);
-                butt.addEventListener("click", function(){LoadImageModal(i)});
+                butt.addEventListener("click", function () { LoadImageModal(i) });
             }
 
         })
 }
 
-function ChangePicsPerPage(i){
+function ChangePicsPerPage(i) {
     picsPerPage = i;
     GetPageThumbnails();
 }
 
-function GetPictureInfo(index){
-    var key = Object.keys(metadata)[index];
+function GetPictureInfo(index) {
+    var key = metadataKeys[index];
     console.log(metadata[key]);
     imageDateField.innerHTML = metadata[key].date ? metadata[key].date : "undated";
     imageNameField.innerHTML = metadata[key].name ? metadata[key].name : "unnamed";
-    imageNicknameField.innerHTML = metadata[key].nickname ? metadata[key].nickname : "nonick";
-    imageTagsField.innerHTML = metadata[key].tags ? metadata[key].tags : "notags";
+    // imageNicknameField.innerHTML = metadata[key].nickname ? metadata[key].nickname : "nonick";
+    // imageTagsField.innerHTML = metadata[key].tags ? metadata[key].tags : "notags";
 }
 
-function MainImageForward(){
+function MainImageForward() {
     var nextPicture = currentImage + 1;
-    if( nextPicture  < numPics ){//if next image exists
-        if( nextPicture % picsPerPage < currentImage % picsPerPage ){//if we need to page forward do it
+    if (nextPicture < numPics) {//if next image exists
+        if (nextPicture % picsPerPage < currentImage % picsPerPage) {//if we need to page forward do it
             PageForward();
         }
         GetImage(nextPicture);
@@ -74,10 +77,10 @@ function MainImageForward(){
     }
 }
 
-function MainImageBackward(){
+function MainImageBackward() {
     var prevPicture = currentImage - 1;
-    if( prevPicture  >= 0 ){//if next image exists
-        if( prevPicture % picsPerPage > currentImage % picsPerPage ){//if we need to page forward do it
+    if (prevPicture >= 0) {//if next image exists
+        if (prevPicture % picsPerPage > currentImage % picsPerPage) {//if we need to page forward do it
             PageBackward();
         }
         GetImage(prevPicture);
@@ -86,63 +89,63 @@ function MainImageBackward(){
     }
 }
 
-function PageForward(){
-    if( (pageIndex + 1) * picsPerPage < numPics ){
+function PageForward() {
+    if ((pageIndex + 1) * picsPerPage < numPics) {
         pageIndex++;
         GetPageThumbnails();
     }
 }
 
-function LoadImageModal(index){
+function LoadImageModal(index) {
     const startIndex = pageIndex * picsPerPage;
     currentImage = index + startIndex
     GetImage(currentImage);
     GetPictureInfo(currentImage);
 }
 
-function CloseImageModal(){
+function CloseImageModal() {
     var _img = document.getElementById('main-img');
     _img.setAttribute('src', '');
 }
 
-function PageBackward(){
-    if( (pageIndex - 1) * picsPerPage >= 0 ){
+function PageBackward() {
+    if ((pageIndex - 1) * picsPerPage >= 0) {
         pageIndex--;
         GetPageThumbnails();
     }
 }
 
 function GetImage(index) {
-    var key = Object.keys(metadata)[index];
+    var key = metadataKeys[index];
     // console.log(key + " index: " + index);
-    if (key == null){return false;}
+    if (key == null) { return false; }
     var _img = document.getElementById('main-img');
     var newImg = new Image;
     newImg.onload = function () {
         _img.src = this.src;
         return true;
     }
-    newImg.src = 'https://raw.githubusercontent.com/johnCavatelli/WebsiteKoreaPictures/main/imgs/DSCN'+ key +'.JPG';
+    newImg.src = 'https://raw.githubusercontent.com/johnCavatelli/WebsiteKoreaPictures/main/imgs/DSCN' + key + '.JPG';
     return true;
 }
 
 function GetThumb(index) {
-    var key = Object.keys(metadata)[index];
+    var key = metadataKeys[index];
     // console.log(key + " index: " + index);
-    if (key == null){return false;}
-    var _img = document.getElementById('thmb'+ (index%picsPerPage));
+    if (key == null) { return false; }
+    var _img = document.getElementById('thmb' + (index % picsPerPage));
     var newImg = new Image;
     newImg.onload = function () {
         _img.src = this.src;
         return true;
     }
-    newImg.src = 'https://raw.githubusercontent.com/johnCavatelli/WebsiteKoreaPictures/main/thumbs/DSCN'+ key +'.JPG';
+    newImg.src = 'https://raw.githubusercontent.com/johnCavatelli/WebsiteKoreaPictures/main/thumbs/DSCN' + key + '.JPG';
     return true;
 }
 
-function ClearBlankThumbnails(startIndex){
+function ClearBlankThumbnails(startIndex) {
     for (let i = startIndex; i < 20; i++) {
-        var _img = document.getElementById('thmb'+ (i));
+        var _img = document.getElementById('thmb' + (i));
         _img.setAttribute('src', '');
     }
 }
@@ -150,8 +153,8 @@ function ClearBlankThumbnails(startIndex){
 function GetPageThumbnails() {
     const startIndex = pageIndex * picsPerPage;
     for (let i = 0; i < picsPerPage; i++) {
-        if(!GetThumb(startIndex + i)){
-            ClearBlankThumbnails(i%picsPerPage);
+        if (!GetThumb(startIndex + i)) {
+            ClearBlankThumbnails(i % picsPerPage);
             break;
         }
     }

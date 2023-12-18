@@ -12,6 +12,7 @@ export default defineConfig({
         blog: resolve(__dirname, 'blog/index.html'),
         korea: resolve(__dirname, 'korea/index.html'),
         hell: resolve(__dirname, 'hell/index.html'),
+        phone: resolve(__dirname, 'phone/index.html'),
       },
     },
   },

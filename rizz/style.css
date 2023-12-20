@@ -39,7 +39,14 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  width: 100vw;
   /* Ensure container fills the entire viewport height */
+}
+
+
+
+.ctr-txt{
+  text-align: center;
 }
 
 table .mainTable {
@@ -109,4 +116,32 @@ table.cinereousTable tfoot {
 
 table.cinereousTable tfoot td {
   font-size: 16px;
+}
+
+.top-site-map{
+  display: none;
+}
+
+/* .side-site-map{
+  display:none;
+} */
+
+.good-gif{
+  max-width: 50vw;
+}
+
+
+@media screen and (max-width: 600px) {
+  .top-site-map{
+    display: none;
+  }
+/* 
+  .side-site-map{
+    display: none;
+  } */
+
+  .good-gif{
+    max-width: 20vw;
+  }
+  
 }

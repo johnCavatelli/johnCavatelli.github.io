@@ -21,10 +21,15 @@ function getNewRandomColor() {
   const colorChoice = currentPallete[colorChoiceIndex];
   return colorChoice;
 }
+
+function playSound() {
+  
+}
+
 function animate() {
   const screenHeight = document.body.clientHeight;
   const screenWidth = document.body.clientWidth;
-  console.log(screenHeight + "  " + screenWidth);
+  // console.log(screenHeight + "  " + screenWidth);
 
   if (y + dvdHeight >= screenHeight || y < 0) {
     dirY *= -1;

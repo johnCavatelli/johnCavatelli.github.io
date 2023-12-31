@@ -21,10 +21,10 @@ const imageDateField = document.getElementById("img-date");
 const imageNameField = document.getElementById("img-name");
 // const imageNicknameField = document.getElementById("img-nickname");
 // const imageTagsField = document.getElementById("img-tags");
-leftPagebutton.addEventListener("click", function () { PageBackward() });
-rightPagebutton.addEventListener("click", function () { PageForward() });
-leftImageButton.addEventListener("click", function () { MainImageBackward() });
-rightImageButton.addEventListener("click", function () { MainImageForward() });
+leftPagebutton.addEventListener("click", function () { ChangeImage(-picsPerPage) });
+rightPagebutton.addEventListener("click", function () { ChangeImage(picsPerPage) });
+leftImageButton.addEventListener("click", function () { ChangeImage(-1) });
+rightImageButton.addEventListener("click", function () { ChangeImage(1) });
 twentyButton.addEventListener("click", function () { ChangePicsPerPage(20) });
 fourButton.addEventListener("click", function () { ChangePicsPerPage(4) });
 tenButton.addEventListener("click", function () { ChangePicsPerPage(10) });
@@ -35,10 +35,10 @@ function Startup() {
     fetch('https://raw.githubusercontent.com/johnCavatelli/WebsiteKoreaPictures/main/metadata.json').then(response => response.json())
         .then(response => {
             metadata = response;
-            numPics = Object.keys(metadata).length;
+            numPics = Object.keys(metadata).length;            
             metadataKeys = Object.keys(metadata);
             metadataKeys.sort((a, b) => parseInt(a) - parseInt(b));
-            
+
             // console.log(metadataKeys);
             //console.log("Pictures on site: " + numPics);
             GetPageThumbnails();
@@ -58,40 +58,33 @@ function ChangePicsPerPage(i) {
 
 function GetPictureInfo(index) {
     var key = metadataKeys[index];
-    console.log(metadata[key]);
+    // console.log(metadata[key]);
     imageDateField.innerHTML = metadata[key].date ? metadata[key].date : "undated";
     imageNameField.innerHTML = metadata[key].name ? metadata[key].name : "unnamed";
     // imageNicknameField.innerHTML = metadata[key].nickname ? metadata[key].nickname : "nonick";
     // imageTagsField.innerHTML = metadata[key].tags ? metadata[key].tags : "notags";
 }
 
-function MainImageForward() {
-    var nextPicture = currentImage + 1;
-    if (nextPicture < numPics) {//if next image exists
-        if (nextPicture % picsPerPage < currentImage % picsPerPage) {//if we need to page forward do it
-            PageForward();
-        }
-        GetImage(nextPicture);
-        GetPictureInfo(nextPicture);
-        currentImage++;
+
+function ChangeImage(amount) {
+    if( currentImage + amount < 0){//if loop backwards
+        currentImage = numPics - picsPerPage - 1;
     }
+    else if (currentImage + amount >= numPics){//if loop forwards
+        currentImage = 0;
+    }
+    else{
+        currentImage = currentImage + amount;
+    }
+    GetImage(currentImage);
+    GetPictureInfo(currentImage);
+    UpdatePage();
 }
 
-function MainImageBackward() {
-    var prevPicture = currentImage - 1;
-    if (prevPicture >= 0) {//if next image exists
-        if (prevPicture % picsPerPage > currentImage % picsPerPage) {//if we need to page forward do it
-            PageBackward();
-        }
-        GetImage(prevPicture);
-        GetPictureInfo(prevPicture);
-        currentImage--;
-    }
-}
-
-function PageForward() {
-    if ((pageIndex + 1) * picsPerPage < numPics) {
-        pageIndex++;
+function UpdatePage(){
+    var newIndex = Math.floor(currentImage / picsPerPage);
+    if(newIndex != pageIndex){
+        pageIndex = newIndex;
         GetPageThumbnails();
     }
 }
@@ -106,13 +99,6 @@ function LoadImageModal(index) {
 function CloseImageModal() {
     var _img = document.getElementById('main-img');
     _img.setAttribute('src', '');
-}
-
-function PageBackward() {
-    if ((pageIndex - 1) * picsPerPage >= 0) {
-        pageIndex--;
-        GetPageThumbnails();
-    }
 }
 
 function GetImage(index) {

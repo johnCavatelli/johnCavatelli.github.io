@@ -24,26 +24,29 @@ camera.lookAt(0, 0, 0);
 const scene = new THREE.Scene();
 const gltfLoader = new GLTFLoader(loadingManager);
 
+
 //Geometry
+//to add new home-page link: add new entry to linkTitle, links, duplicate an eyeMesh, and add entry to tubeMeshes constant
 var models = {};
 var textHitboxes = {};
-const linkTitles = ['about', 'garden', 'korea'];//art games contact
-const links = ["aj is really stupid for indexing at 1", "/about/index.html", "/garden/index.html", "/korea/index.html"]
+const linkTitles = [' about', 'garden', 'korea','  art'];//may need spaces for padding
+const links = ["aj is really stupid for indexing at 1", "/about/index.html", "/garden/index.html", "/korea/index.html","/art/index.html"]
 const meshNormalMat = new THREE.MeshNormalMaterial();
 const centerBox = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), meshNormalMat);
 centerBox.position.set(0, 0, 0);
 scene.add(centerBox);
 const eyeMat = new THREE.MeshStandardMaterial({ map: new THREE.Texture() });
-const eyeMeshes = [1, 2, 3];//the incidies of all the eyeballs in the model array
+const eyeMeshes = [1, 2, 3, 4];//the incidies of all the eyeballs in the model array
 const eyeURL = new URL('/models/ball.glb', import.meta.url);
 const skeletonMat = new THREE.MeshStandardMaterial({ wireframe: true, wireframeLinewidth: 3, color: new THREE.Color(`hsl(${Math.random() * 100},100%,50%)`) });
 const skeletonHighlightMat = new THREE.MeshStandardMaterial({ wireframe: true, wireframeLinewidth: 5, color: new THREE.Color(0x0000ff) });
 const skeletonURL = new URL('/models/aaa.glb', import.meta.url);
 await CreateMesh(skeletonURL, [skeletonMat], [0, 0, 0], [0, 0, 0], 2, 69, true);
-await CreateMesh(eyeURL, [eyeMat], [8, 15, -4], [0, 0, 0], 0.5, 1, true);
-await CreateMesh(eyeURL, [eyeMat], [10, 0, 7], [0, 0, 0], 0.5, 2, true);
-await CreateMesh(eyeURL, [eyeMat], [12, -15, 0], [0, 0, 0], 0.5, 3, true);
-const tubeMeshes = [101, 102, 103];//indicies of all the tubes
+await CreateMesh(eyeURL, [eyeMat], [0, 0, 0], [0, 0, 0], 0.5, 1, true);
+await CreateMesh(eyeURL, [eyeMat], [0, 0, 0], [0, 0, 0], 0.5, 2, true);
+await CreateMesh(eyeURL, [eyeMat], [0, 0, 0], [0, 0, 0], 0.5, 3, true);
+await CreateMesh(eyeURL, [eyeMat], [0, 0, 0], [0, 0, 0], 0.5, 4, true);
+const tubeMeshes = [101, 102, 103, 104];//indicies of all the tubes
 await CreateTubeMeshes();
 
 

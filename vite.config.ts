@@ -13,7 +13,8 @@ export default defineConfig({
         korea: resolve(__dirname, 'korea/index.html'),
         hell: resolve(__dirname, 'hell/index.html'),
         phone: resolve(__dirname, 'phone/index.html'),
-        rizz: resolve(__dirname, 'rizz/index.html')
+        rizz: resolve(__dirname, 'rizz/index.html'),
+        art: resolve(__dirname, 'art/index.html')
       },
     },
   },

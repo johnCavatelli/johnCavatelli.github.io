@@ -73,6 +73,9 @@ body {
     text-shadow: 6px 4px 5px rgba(69,63,90,1);
 }
 
+img{
+    max-width: 100%;
+}
 
 .br {
     display: block;

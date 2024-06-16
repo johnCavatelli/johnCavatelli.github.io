@@ -14,7 +14,8 @@ export default defineConfig({
         hell: resolve(__dirname, 'hell/index.html'),
         phone: resolve(__dirname, 'phone/index.html'),
         rizz: resolve(__dirname, 'rizz/index.html'),
-        art: resolve(__dirname, 'art/index.html')
+        art: resolve(__dirname, 'art/index.html'),
+        europe: resolve(__dirname, 'europe/index.html')
       },
     },
   },

@@ -15,7 +15,8 @@ export default defineConfig({
         phone: resolve(__dirname, 'phone/index.html'),
         rizz: resolve(__dirname, 'rizz/index.html'),
         art: resolve(__dirname, 'art/index.html'),
-        europe: resolve(__dirname, 'europe/index.html')
+        europe: resolve(__dirname, 'europe/index.html'),
+        europeMain: resolve(__dirname, 'europe/mainpage.html')
       },
     },
   },

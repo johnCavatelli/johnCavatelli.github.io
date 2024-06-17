@@ -1,15 +1,26 @@
 dragElement(document.getElementById("window"));
+dragElement(document.getElementById("window2"));
+var maxZ = 1;//this is so fucking ratchet lol
 
 function dragElement(elmnt) {
   var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
   var isDragging = false;
 
+
+  //document.getElementById(elmnt.id).onmousedown = bringToFront(elmnt.id);
+  elmnt.addEventListener("mousedown", function () {bringToFront(elmnt.id) });
   if (document.getElementById(elmnt.id + "header")) {
     document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
     document.getElementById(elmnt.id + "header").addEventListener('touchstart', dragTouchStart, { passive: false });
   } else {
     elmnt.onmousedown = dragMouseDown;
     elmnt.addEventListener('touchstart', dragTouchStart, { passive: false });
+  }
+
+  function bringToFront(id){
+    console.log("MOVING " + id);
+    document.getElementById(id).style.zIndex = maxZ;
+    maxZ = maxZ + 1;
   }
 
   function dragMouseDown(e) {

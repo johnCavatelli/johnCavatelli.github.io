@@ -54,10 +54,38 @@
       <span id="datetime" style="color: azure;"></span>
     </div>
   </div>
-
+  
   <!-- Window -->
+  <div class="window" style="width: 88%" id="window2">
+    <div class="title-bar" id="window2header">
+      <img aria-label="windowicon" src="./icons/information.png">
+      <div class="title-bar-text">Photo Viewer</div>
+      <div class="title-bar-controls">
+        <button aria-label="Minimize"></button>
+        <button aria-label="Maximize"></button>
+        <button aria-label="Close"></button>
+      </div>
+    </div>
+    <div class="window-body" style="overflow:auto; height: 95vh">
+      <img id="main-img" style="max-height: 70vh; max-width: 95%; position: relative;">
+      <fieldset>
+        <div class="field-row">radio buttons:</div>
+        <div class="field-row">
+          <input id="radio5" type="radio" name="fieldset-example">
+          <label for="radio5">Move Left</label>
+        </div>
+        <div class="field-row">
+          <input id="radio6" type="radio" name="fieldset-example">
+          <label for="radio6">No, Me!</label>
+        </div>
+      </fieldset>
 
-  <div class="window" style="width: 80%" id="window">
+
+    </div>
+  </div>
+
+
+  <div class="window" style="width: 99%" id="window">
     <div class="title-bar" id="windowheader">
       <img aria-label="windowicon" src="./icons/information.png">
       <div class="title-bar-text">Pictures from Europe</div>
@@ -70,100 +98,29 @@
     <div class="window-body" style="overflow:auto; height: 80vh">
       <h3>Select a City to view photos from</h3>
       <section class="field-row" style="justify-content: flex-start">
-        <button>Barcelona 1</button>
-        <button>Rome</button>
-        <button>Florence</button>
-        <button>Budapest</button>
-        <button>Berlin</button>
-        <button>Amsterdam</button>
-        <button>Paris</button>
-        <button>Barcelona 2</button>
+        <button id="bar1">Barcelona 1</button>
+        <button id="rom">Rome</button>
+        <button id="flo">Florence</button>
+        <button id="bud">Budapest</button>
+        <button id="ber">Berlin</button>
+        <button id="ams">Amsterdam</button>
+        <button id="par">Paris</button>
+        <button id="bar2">Barcelona 2</button>
       </section>
       <br>
       <br>
       <hr>
-      <br>
-      <p>this is just filler content.</p>
-      <br>
-      <p>this is just filler content.</p>
-      <br>
-      <p>this is just filler content.</p>
-      <br>
-      <p>this is just filler content.</p>
-      <br>
-      <p>this is just filler content.</p>
-      <br>
-      <p>this is just filler content.</p>
-      <br>
-      <p>this is just filler content.</p>
-      <br>
-      <p>this is just filler content.</p>
-      <br>
-      <p>this is just filler content.</p>
-      <br>
-      <p>this is just filler content.</p>
-      <br>
-      <p>this is just filler content.</p>
-      <br>
-      <p>this is just filler content.</p>
-      <br>
-      <p>this is just filler content.</p>
-      <br>
-      <p>this is just filler content.</p>
-      <br>
-      <p>this is just filler content.</p>
-      <br>
-      <p>this is just filler content.</p>
-      <br>
-      <p>this is just filler content.</p>
-      <br>
-      <p>this is just filler content.</p>
-      <br>
-      <p>this is just filler content.</p>
-      <br>
-      <p>this is just filler content.</p>
-      <br>
-      <p>this is just filler content.</p>
-      <br>
-      <p>this is just filler content.</p>
-      <br>
-      <p>this is just filler content.</p>
-      <br>
-      <p>this is just filler content.</p>
-      <br>
-      <p>this is just filler content.</p>
-      <br>
-      <p>this is just filler content.</p>
-      <br>
-      <p>this is just filler content.</p>
-      <br>
-      <p>this is just filler content.</p>
-      <br>
-      <p>this is just filler content.</p>
-      <br>
-      <p>this is just filler content.</p>
-
-
+      <div class="button-container" id="buttonContainer"></div>
 
       <input type="checkbox" id="checkbox1">
       <label for="checkbox1">CheckBox</label>
 
-      <fieldset>
-        <div class="field-row">radio buttons:</div>
-        <div class="field-row">
-          <input id="radio5" type="radio" name="fieldset-example">
-          <label for="radio5">Me?</label>
-        </div>
-        <div class="field-row">
-          <input id="radio6" type="radio" name="fieldset-example">
-          <label for="radio6">No, Me!</label>
-        </div>
-      </fieldset>
-
-
     </div>
   </div>
 
+
+
+  <script type="module" src="main.js"></script>
 
   <!-- window drag -->
   <script src="./WindowDrag.js"></script>

@@ -55,7 +55,7 @@ function ChangeImageRange(startIndex, endIndex){
 function ChangeIndividualPhoto(i,s){
     var photo = document.getElementById("img-" + i);
     var key = metadataKeys[s + i];
-    console.log(key + " index: " + i);
+    //console.log(key + " index: " + i);
     var newImg = new Image;
     newImg.onload = function () {
         photo.src = this.src;
@@ -65,7 +65,7 @@ function ChangeIndividualPhoto(i,s){
 
 function LoadFullImage(i){
     var key = metadataKeys[curStartIndex + i];
-    console.log(key + " index: " + i);
+    //console.log(key + " index: " + i);
     if (key == null) { return false; }
     var _img = document.getElementById('main-img');
     var newImg = new Image;
@@ -97,7 +97,7 @@ document.addEventListener("DOMContentLoaded", function() {
   });
   
   function OnPress(buttonIndex) {
-    console.log("Button " + buttonIndex + " was pressed");
+    //console.log("Button " + buttonIndex + " was pressed");
     // Add your photo loading logic here
   }
 

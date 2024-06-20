@@ -50,11 +50,11 @@
           src="./icons/information.png"></button>
     </div>
     <div class="datetime"></div>
-    <div class="aeropeek"> 
+    <div class="aeropeek">
       <span id="datetime" style="color: azure;"></span>
     </div>
   </div>
-  
+
   <!-- Window -->
   <div class="window" style="width: 88%" id="window2">
     <div class="title-bar" id="window2header">
@@ -69,15 +69,28 @@
     <div class="window-body" style="overflow:auto; height: 95vh">
       <img id="main-img" style="max-height: 70vh; max-width: 95%; position: relative;">
       <fieldset>
-        <div class="field-row">radio buttons:</div>
         <div class="field-row">
+          <p id="imgName">0000.JPG</p>
+        </div>
+        <div class="field-row">
+          <p id="imgDate">-----------</p>
+        </div>
+      </fieldset>
+      <fieldset>
+        <div class="field-row">Image Controls: </div>
+        <div class="field-row">
+          <button id="prevImg">&lt;-- Prev</button>
+          <button id="nextImg">Next --&gt;</button>
+        </div>
+
+        <!-- <div class="field-row">
           <input id="radio5" type="radio" name="fieldset-example">
           <label for="radio5">Move Left</label>
         </div>
         <div class="field-row">
           <input id="radio6" type="radio" name="fieldset-example">
           <label for="radio6">No, Me!</label>
-        </div>
+        </div> -->
       </fieldset>
 
 
@@ -123,11 +136,11 @@
   <script type="module" src="main.js"></script>
 
   <!-- window drag -->
-  <script src="../resource/WindowDrag.js"></script>
+  <!-- <script src="../resource/WindowDrag.js"></script> -->
 
   <!-- Taskbar Gradient Hover -->
-  <script src="../resource/TaskbarGradient.js"></script>
-  <script src="../resource/Clock.js"></script>
+  <!-- <script src="../resource/TaskbarGradient.js"></script> -->
+  <!-- <script src="../resource/Clock.js"></script> -->
 </body>
 
 </html>

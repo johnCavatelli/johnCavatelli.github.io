@@ -281,6 +281,11 @@ button{
     user-select: none;
 }
 
+.window-body-1{
+    overflow:auto;
+    height: 80vh;
+}
+
 .field-row{
     display: flex;
     gap: 10px;
@@ -607,34 +612,28 @@ input[type="checkbox"] + label::before {
     border: 1px solid #ccc;
     cursor: pointer;
     position: relative;
+    padding: 0px;
   }
+
   .photo-button img {
     max-width: 100%;
     max-height: 100%;
-    display: none; /* Initially hide the image */
-  }.button-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-  .photo-button {
-    width: 100px;
-    height: 100px;
-    background-color: #f0f0f0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid #ccc;
-    cursor: pointer;
-    position: relative;
-  }
-  .photo-button img {
-    max-width: 100%;
-    max-height: 100%;
-    display: none; /* Initially hide the image */
+    /* display: none; Initially hide the image */
   }
 
   #main-img {
     max-width: 100%;
     position: relative;
   }
+
+
+
+  @media screen and (max-width: 600px) {
+    /* #window2 {
+        width: 30%;
+    } */
+
+    .window-body-1{
+        height: 40vh;
+    }
+}
